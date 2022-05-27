@@ -1,12 +1,16 @@
+import Joi from 'joi'
+
 export default function baseValidator () {
   /**
    *
-   * @param Schema
+   * @param schema
    * @param params
    * @returns {{data, success: boolean}|{success: boolean, message, error: any}}
    */
-  const validateParam = (Schema, params) => {
-    const validate = Schema.validate(params)
+  const validateParam = (schema, params) => {
+    const joiSchema = Joi.object().keys(schema)
+    const validate = joiSchema.validate(params)
+
     if (validate.error) {
       return {
         success: false,
@@ -23,12 +27,14 @@ export default function baseValidator () {
 
   /**
    *
-   * @param Schema
+   * @param schema
    * @param params
    * @returns {{data, success: boolean}|{success: boolean, message, error: any}}
    */
-  const validateParamAsync = async (Schema, params) => {
-    return Schema.validateAsync(params)
+  const validateParamAsync = async (schema, params) => {
+    const joiSchema = Joi.object().keys(schema)
+
+    return joiSchema.validateAsync(params)
       .then(validate => {
         return {
           success: true,
@@ -46,12 +52,14 @@ export default function baseValidator () {
 
   /**
    *
-   * @param Schema
+   * @param schema
    * @param query
    * @returns {{data, success: boolean}|{success: boolean, message, error: any}}
    */
-  const validateQuery = (Schema, query) => {
-    const validate = Schema.validate(query)
+  const validateQuery = (schema, query) => {
+    const joiSchema = Joi.object().keys(schema)
+
+    const validate = joiSchema.validate(query)
     if (validate.error) {
       return {
         success: false,
@@ -68,12 +76,14 @@ export default function baseValidator () {
 
   /**
    *
-   * @param Schema
-   * @param request
+   * @param schema
+   * @param query
    * @returns {{data, success: boolean}|{success: boolean, message, error: any}}
    */
-  const validateQueryAsync = (Schema, query) => {
-    return Schema.validateAsync(query)
+  const validateQueryAsync = (schema, query) => {
+    const joiSchema = Joi.object().keys(schema)
+
+    joiSchema.validateAsync(query)
       .then((validate) => {
         return {
           success: true,
@@ -90,14 +100,16 @@ export default function baseValidator () {
 
   /**
    *
-   * @param Schema
+   * @param schema
    * @param body
    * @param files
    * @param allowUnknown
    * @returns {{data, success: boolean}|{success: boolean, message, error: any}}
    */
-  const validateBody = (Schema, body, files = undefined, allowUnknown = false) => {
-    const validate = Schema.validate(body, {
+  const validateBody = (schema, body, files = undefined, allowUnknown = false) => {
+    const joiSchema = Joi.object().keys(schema)
+
+    const validate = joiSchema.validate(body, {
       allowUnknown
     })
     if (validate.error) {
@@ -118,15 +130,17 @@ export default function baseValidator () {
 
   /**
    *
-   * @param Schema
+   * @param schema
    * @param body
    * @param files
    * @param allowUnknown
    * @returns {Promise<{success: boolean, message, error: (*|string)}|{data: any, success: boolean}|{success: boolean, message, error: any}>}
    */
-  const validateBodyAsync = async (Schema, body, files = undefined, allowUnknown = false) => {
+  const validateBodyAsync = async (schema, body, files = undefined, allowUnknown = false) => {
     try {
-      const validate = await Schema.validateAsync(body, {
+      const joiSchema = Joi.object().keys(schema)
+
+      const validate = await joiSchema.validateAsync(body, {
         allowUnknown
       })
       if (validate.error) {

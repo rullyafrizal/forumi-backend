@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import base from './base.js'
+import base from '../../frameworks/validator/joi/base.js'
 
 export default function authValidator () {
   const validateLogin = (body) => {
@@ -9,7 +9,7 @@ export default function authValidator () {
     }
 
     return base().validateBody(
-      Joi.object().keys(schema),
+      schema,
       body
     )
   }
@@ -21,7 +21,7 @@ export default function authValidator () {
       name: Joi.string().required()
     }
 
-    return base().validateBody(Joi.object().keys(schema), body)
+    return base().validateBody(schema, body)
   }
 
   return {
