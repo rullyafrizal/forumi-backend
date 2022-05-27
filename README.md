@@ -7,6 +7,9 @@
 - Sequelize ORM
 - Joi Validation
 
+## DB Design
+![db](./erd.png)
+
 ## Installation
 - Clone the repository
 - Install NodeJS v14.* and make sure to use yarn
