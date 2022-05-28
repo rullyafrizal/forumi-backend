@@ -64,3 +64,7 @@ typings/
 .vscode/
 
 .DS_Store
+
+build/
+
+.docker.env

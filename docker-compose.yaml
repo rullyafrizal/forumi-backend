@@ -1,0 +1,42 @@
+version: '3'
+
+networks:
+  forumi-net:
+
+volumes:
+  forumi-vol:
+    driver: local
+
+services:
+  mysql-db:
+    container_name: mysql-db
+    image: "mysql:8.0.28"
+    ports:
+      - "3306:3306"
+    volumes:
+      - forumi-vol:/var/lib/mysql
+      - ./docker/mysql/sql:/docker-entrypoint-initdb.d
+    networks:
+      - forumi-net
+    environment:
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_DATABASE: "test"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "secret"
+    restart: always
+
+  web:
+    container_name: webserver
+    build: .
+    ports:
+      - "1234:1234"
+    env_file:
+      - "./.env"
+    environment:
+      - DB_URI=${DB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_TTL=86400
+    depends_on:
+      - mysql-db
+    networks:
+      - forumi-net

@@ -1,0 +1,12 @@
+{
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ],
+  "ignore": [
+    ".idea",
+    ".git",
+    "node_modules/**/*.js",
+    "erd.png"
+  ]
+}

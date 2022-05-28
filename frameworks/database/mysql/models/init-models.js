@@ -14,6 +14,8 @@ export default function initModels (sequelize) {
   Question.hasMany(Answer, { as: 'answers', foreignKey: 'question_id' })
   Answer.belongsTo(User, { as: 'user', foreignKey: 'user_id' })
   User.hasMany(Answer, { as: 'answers', foreignKey: 'user_id' })
+  User.hasMany(Question, { as: 'questions', foreignKey: 'user_id' })
+  Question.belongsTo(User, { as: 'user', foreignKey: 'user_id' })
 
   return {
     Answer,

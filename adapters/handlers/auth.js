@@ -1,6 +1,6 @@
 import login from '../../application/use_cases/auth/login.js'
 import register from '../../application/use_cases/auth/register.js'
-import baseHandler from './base-handler.js'
+import baseHandler from '../../frameworks/webserver/handlers/base-handler.js'
 import authValidator from '../../application/validator/auth.js'
 
 export default function authController (user) {
@@ -15,7 +15,7 @@ export default function authController (user) {
 
     login(email, password, user)
       .then((token) => {
-        baseHandler().successResponse(res, 'User logged in successfully', token)
+        baseHandler().successResponse(res, 'success:authenticating:user', token)
       })
       .catch((err) => next(err))
   }
@@ -31,7 +31,7 @@ export default function authController (user) {
 
     register(body, user)
       .then((user) => {
-        baseHandler().successResponse(res, 'User registered successfully', null)
+        baseHandler().successResponse(res, 'success:create:user', null)
       })
       .catch((err) => next(err))
   }

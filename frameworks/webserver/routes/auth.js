@@ -1,4 +1,4 @@
-import authHandler from '../../../adapters/handlers/auth-handler.js'
+import authHandler from '../../../adapters/handlers/auth.js'
 
 export default function authRouter (express, models) {
   const router = express.Router()

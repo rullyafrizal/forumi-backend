@@ -21,6 +21,12 @@ const models = initModels(sequelizeConn)
 
 routes(app, express, models)
 
+app.use('/', function (req, res, next) {
+  return res.status(200).json({
+    status_code: 200,
+    message: 'Welcome to forumi backend API'
+  })
+})
 // global error handling middleware
 app.use(errorHandlingMiddleware)
 

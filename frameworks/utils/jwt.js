@@ -33,8 +33,8 @@ export default function jwtHelper () {
     return jwt.decode(token, { complete: true })
   }
 
-  const extractUserId = token => {
-    return this.decode(token).payload.user.id
+  const extractUserId = (token) => {
+    return decode(token).payload.user.id
   }
 
   const verifyToken = async token => {

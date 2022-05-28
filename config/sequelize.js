@@ -4,7 +4,8 @@ export default {
     dialect: 'mysql',
     dialectOptions: {
       dateStrings: true,
-      typeCast: true
+      typeCast: true,
+      useUTC: false
     },
     logging: console.log,
     timezone: process.env.TZ || '+07:00'

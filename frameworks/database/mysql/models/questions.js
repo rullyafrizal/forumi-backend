@@ -7,6 +7,14 @@ export default function questions (sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    user_id: {
+      type: DataTypes.BIGINT.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
+    },
     question: {
       type: DataTypes.TEXT,
       allowNull: false
