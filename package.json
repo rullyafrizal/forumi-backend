@@ -7,6 +7,8 @@
     "build-server": "babel --out-dir ./build . --source-maps --no-copy-ignored --ignore 'node_modules/**/*.js'",
     "build": "npm run clean && npm run build-server",
     "start": "dotenv -- cross-var pm2 start ./build/app.js -i ${NODE_PROCESSES} --no-daemon",
+    "stop": "dotenv -- cross-var pm2 stop app",
+    "prod": "NODE_ENV=production dotenv -- cross-var pm2 start ./build/app.js -i 1",
     "dev": "NODE_ENV=development nodemon --exec babel-node  --require dotenv/config app.js",
     "sequelize-auto-mysql": "sequelize-auto -o frameworks/database/mysql/models/ -d forumi -u root -x secret -h 127.0.0.1 --dialect mysql --port 33769"
   },
