@@ -6,7 +6,8 @@ import jwtHelper from '../../frameworks/utils/jwt'
 export default function questionValidator () {
   const validateStore = (body) => {
     const schema = {
-      question: Joi.string().required(),
+      title: Joi.string().required(),
+      body: Joi.string(),
       subject: Joi.string().required()
     }
 
@@ -44,7 +45,8 @@ export default function questionValidator () {
       }
 
       const schema = {
-        question: Joi.string().required(),
+        title: Joi.string().required(),
+        body: Joi.string(),
         subject: Joi.string().required()
       }
 

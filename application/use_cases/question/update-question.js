@@ -3,7 +3,8 @@ import { CreateNewError, ParseError } from '../../../frameworks/utils/error'
 export default async function updateQuestion (Question, params, body, userId) {
   try {
     return await Question.update({
-      question: body.question,
+      title: body.question,
+      body: body.body,
       subject: body.subject
     }, {
       where: {

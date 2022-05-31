@@ -3,7 +3,8 @@ import { CreateNewError, ParseError } from '../../../frameworks/utils/error.js'
 export default async function createQuestion (Question, body, userId) {
   try {
     return await Question.create({
-      question: body.question,
+      title: body.question,
+      body: body.body,
       subject: body.subject,
       user_id: userId
     })

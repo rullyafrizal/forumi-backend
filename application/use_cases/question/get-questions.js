@@ -25,7 +25,7 @@ export default async function getQuestions (Question, User, query) {
     }
 
     sequelizeOptions.attributes = [
-      'id', 'question', 'subject',
+      'id', 'title', 'subject',
       'created_at', 'updated_at'
     ]
 

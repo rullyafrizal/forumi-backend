@@ -1,8 +1,8 @@
 export default async function getQuestionById (Question, User, Answer, params) {
   const { id } = params
 
-  const question = await Question.findOne({
-    attributes: ['id', 'question', 'subject', 'createdAt'],
+  return await Question.findOne({
+    attributes: ['id', 'title', 'body', 'subject', 'createdAt'],
     where: {
       id
     },
@@ -26,6 +26,4 @@ export default async function getQuestionById (Question, User, Answer, params) {
       }
     ]
   })
-
-  return question
 }

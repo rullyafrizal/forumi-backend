@@ -15,9 +15,13 @@ export default function questions (sequelize, DataTypes) {
         key: 'id'
       }
     },
-    question: {
-      type: DataTypes.TEXT,
+    title: {
+      type: DataTypes.STRING(255),
       allowNull: false
+    },
+    body: {
+      type: DataTypes.TEXT,
+      allowNull: true
     },
     subject: {
       type: DataTypes.STRING(100),
