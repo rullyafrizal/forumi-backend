@@ -24,7 +24,8 @@ routes(app, express, models)
 app.use('/', function (req, res, next) {
   return res.status(200).json({
     status_code: 200,
-    message: 'Welcome to forumi backend API'
+    message: 'Welcome to forumi backend API',
+    env: process.env.NODE_ENV === 'production' ? null : process.env
   })
 })
 // global error handling middleware

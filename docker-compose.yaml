@@ -8,28 +8,28 @@ volumes:
     driver: local
 
 services:
-  mysql-db:
-    container_name: mysql-db
-    image: "mysql:8.0.28"
-    ports:
-      - "3306:3306"
-    volumes:
-      - forumi-vol:/var/lib/mysql
-      - ./docker/mysql/sql:/docker-entrypoint-initdb.d
-    networks:
-      - forumi-net
-    environment:
-      MYSQL_ROOT_PASSWORD: "secret"
-      MYSQL_DATABASE: "test"
-      MYSQL_USER: "admin"
-      MYSQL_PASSWORD: "secret"
-    restart: always
+#  mysql-db:
+#    container_name: mysql-db
+#    image: "mysql:8.0.28"
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - forumi-vol:/var/lib/mysql
+#      - ./docker/mysql/sql:/docker-entrypoint-initdb.d
+#    networks:
+#      - forumi-net
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "secret"
+#      MYSQL_DATABASE: "test"
+#      MYSQL_USER: "admin"
+#      MYSQL_PASSWORD: "secret"
+#    restart: always
 
   web:
-    container_name: webserver
+    container_name: forumi-webserver
     build: .
     ports:
-      - "1234:1234"
+      - "3001:3000"
     env_file:
       - "./.env"
     environment:

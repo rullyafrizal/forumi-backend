@@ -11,6 +11,8 @@ export default async function getQuestions (Question, User, query) {
       sort
     } = paginationHelper().sanitizeQuery(query)
 
+    const { uid } = query
+
     const sequelizeOptions = paginationHelper().buildOptions({
       perPage, currentPage, sort
     })
@@ -22,6 +24,10 @@ export default async function getQuestions (Question, User, query) {
         { question: { [Op.like]: `%${search}%` } },
         { subject: { [Op.like]: `%${search}%` } }
       ]
+    }
+
+    if (uid) {
+      sequelizeOptions.where.user_id = uid
     }
 
     sequelizeOptions.attributes = [

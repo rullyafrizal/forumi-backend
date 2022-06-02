@@ -1,10 +1,11 @@
 import { CreateNewError, ParseError } from '../../../frameworks/utils/error'
+import sanitizeHtml from 'sanitize-html'
 
 export default async function updateQuestion (Question, params, body, userId) {
   try {
     return await Question.update({
       title: body.question,
-      body: body.body,
+      body: sanitizeHtml(body.body),
       subject: body.subject
     }, {
       where: {
