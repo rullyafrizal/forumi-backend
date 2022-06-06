@@ -15,7 +15,6 @@ export default async function login (email, password, user) {
         email
       },
       attributes: ['id', 'email', 'password', 'name', 'avatar']
-
     })
 
     if (!data) {
@@ -43,7 +42,13 @@ export default async function login (email, password, user) {
     }
 
     return {
-      token
+      token,
+      user: {
+        id: data.id,
+        email: data.email,
+        name: data.name,
+        avatar: data.avatar
+      }
     }
   } catch (err) {
     const newError = ParseError(err)

@@ -41,8 +41,7 @@
     "pm2": "^5.2.0",
     "sanitize-html": "^2.7.0",
     "sequelize": "^6.20.0",
-    "sequelize-auto": "^0.8.8",
-    "swagger-autogen": "^2.21.2"
+    "sequelize-auto": "^0.8.8"
   },
   "devDependencies": {
     "eslint": "^8.0.1",

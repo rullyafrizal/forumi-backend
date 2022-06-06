@@ -6,7 +6,7 @@ export default function authRouter (express, models) {
   // load controller with dependencies
   const controller = authHandler(models.User)
 
-  // POST enpdpoints
+  // POST endpoints
   router.route('/login').post(controller.loginUser)
   router.route('/register').post(controller.registerUser)
 

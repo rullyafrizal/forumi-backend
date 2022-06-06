@@ -7,7 +7,7 @@ export default async function register (body, user) {
       name: body.name,
       email: body.email,
       password: bcryptHelper().hash(body.password),
-      avatar: 'https://ui-avatars.com/api/?name=' + body.name
+      avatar: `https://ui-avatars.com/api/?name=${body.name}&background=0D8ABC&color=fff&size=128`
     })
   } catch (err) {
     const newError = ParseError(err)
