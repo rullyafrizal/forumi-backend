@@ -11,13 +11,13 @@ export default function answerController (Question, Answer) {
       const { success, message, error } = await answerValidator({ Question }).validateStore(req.body)
 
       if (!success) {
-        baseHandler().badRequest(res, message, error)
+        return baseHandler().badRequest(res, message, error)
       }
 
       const token = jwtHelper().getToken(req)
       const answer = await createAnswer(Answer, req.body, jwtHelper().extractUserId(token))
 
-      baseHandler().successResponse(res, 'success:create:answer', answer)
+      return baseHandler().successResponse(res, 'success:create:answer', answer)
     } catch (err) {
       next(err)
     }
@@ -31,12 +31,12 @@ export default function answerController (Question, Answer) {
         .validateUpdate(req.body, req.params, token)
 
       if (!success) {
-        baseHandler().badRequest(res, message, error)
+        return baseHandler().badRequest(res, message, error)
       }
 
       await updateAnswer(Answer, req.params, req.body, jwtHelper().extractUserId(token))
 
-      baseHandler().successResponse(res, 'success:update:answer', null)
+      return baseHandler().successResponse(res, 'success:update:answer', null)
     } catch (err) {
       next(err)
     }
@@ -50,12 +50,12 @@ export default function answerController (Question, Answer) {
         .validateDelete(req.params, token)
 
       if (!success) {
-        baseHandler().badRequest(res, message, error)
+        return baseHandler().badRequest(res, message, error)
       }
 
       await deleteAnswer(Answer, req.params, jwtHelper().extractUserId(token))
 
-      baseHandler().successResponse(res, 'success:delete:answer', null)
+      return baseHandler().successResponse(res, 'success:delete:answer', null)
     } catch (err) {
       next(err)
     }

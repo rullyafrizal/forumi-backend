@@ -10,7 +10,7 @@ export default function authController (user) {
     const { success, message, error } = authValidator().validateLogin(req.body)
 
     if (!success) {
-      baseHandler().badRequest(res, message, error)
+      return baseHandler().badRequest(res, message, error)
     }
 
     login(email, password, user)
@@ -26,7 +26,7 @@ export default function authController (user) {
     const { success, message, error } = authValidator().validateRegister(body)
 
     if (!success) {
-      baseHandler().badRequest(res, message, error)
+      return baseHandler().badRequest(res, message, error)
     }
 
     register(body, user)

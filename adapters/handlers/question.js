@@ -13,13 +13,13 @@ export default function questionController (Question, User, Answer) {
       const { success, message, error } = questionValidator().validateStore(req.body)
 
       if (!success) {
-        baseHandler().badRequest(res, message, error)
+        return baseHandler().badRequest(res, message, error)
       }
 
       const token = jwtHelper().getToken(req)
       const question = await createQuestion(Question, req.body, jwtHelper().extractUserId(token))
 
-      baseHandler().successResponse(res, 'success:create:question', question)
+      return baseHandler().successResponse(res, 'success:create:question', question)
     } catch (err) {
       next(err)
     }
@@ -40,12 +40,12 @@ export default function questionController (Question, User, Answer) {
       const { success, message, error } = await questionValidator().validateShow(Question, req.params)
 
       if (!success) {
-        baseHandler().badRequest(res, message, error)
+        return baseHandler().badRequest(res, message, error)
       }
 
       const question = await getQuestionById(Question, User, Answer, req.params)
 
-      baseHandler().successResponse(res, 'success:get:question', question)
+      return baseHandler().successResponse(res, 'success:get:question', question)
     } catch (err) {
       next(err)
     }
@@ -59,12 +59,12 @@ export default function questionController (Question, User, Answer) {
         .validateUpdate(Question, req.body, req.params, token)
 
       if (!success) {
-        baseHandler().badRequest(res, message, error)
+        return baseHandler().badRequest(res, message, error)
       }
 
       await updateQuestion(Question, req.params, req.body, jwtHelper().extractUserId(token))
 
-      baseHandler().successResponse(res, 'success:update:question', null)
+      return baseHandler().successResponse(res, 'success:update:question', null)
     } catch (err) {
       next(err)
     }
@@ -78,12 +78,12 @@ export default function questionController (Question, User, Answer) {
         .validateDestroy(Question, req.params, token)
 
       if (!success) {
-        baseHandler().badRequest(res, message, error)
+        return baseHandler().badRequest(res, message, error)
       }
 
       await destroyQuestion(Question, Answer, req.params, jwtHelper().extractUserId(token))
 
-      baseHandler().successResponse(res, 'success:delete:question', null)
+      return baseHandler().successResponse(res, 'success:delete:question', null)
     } catch (err) {
       next(err)
     }
