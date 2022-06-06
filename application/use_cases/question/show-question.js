@@ -9,7 +9,7 @@ export default async function getQuestionById (Question, User, Answer, params) {
     include: [
       {
         model: User,
-        attributes: ['id', 'name'],
+        attributes: ['id', 'name', 'avatar'],
         as: 'user'
       },
       {
@@ -19,7 +19,7 @@ export default async function getQuestionById (Question, User, Answer, params) {
         include: [
           {
             model: User,
-            attributes: ['id', 'name'],
+            attributes: ['id', 'name', 'avatar'],
             as: 'user'
           }
         ]
