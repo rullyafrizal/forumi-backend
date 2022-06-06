@@ -4,7 +4,7 @@ import sanitizeHtml from 'sanitize-html'
 export default async function createQuestion (Question, body, userId) {
   try {
     return await Question.create({
-      title: body.question,
+      title: body.title,
       body: sanitizeHtml(body.body),
       subject: body.subject,
       user_id: userId
