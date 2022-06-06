@@ -21,7 +21,7 @@ export default async function getQuestions (Question, User, query) {
 
     if (search) {
       sequelizeOptions.where[Op.or] = [
-        { question: { [Op.like]: `%${search}%` } },
+        { title: { [Op.like]: `%${search}%` } },
         { subject: { [Op.like]: `%${search}%` } }
       ]
     }
@@ -31,7 +31,7 @@ export default async function getQuestions (Question, User, query) {
     }
 
     sequelizeOptions.attributes = [
-      'id', 'title', 'subject',
+      'id', 'title', 'subject', 'body',
       'created_at', 'updated_at'
     ]
 

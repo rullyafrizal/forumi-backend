@@ -4,7 +4,7 @@ import sanitizeHtml from 'sanitize-html'
 export default async function updateQuestion (Question, params, body, userId) {
   try {
     return await Question.update({
-      title: body.question,
+      title: body.title,
       body: sanitizeHtml(body.body),
       subject: body.subject
     }, {
