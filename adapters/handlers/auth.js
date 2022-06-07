@@ -23,7 +23,7 @@ export default function authController (user) {
   const registerUser = (req, res, next) => {
     const { body } = req
 
-    const { success, message, error } = authValidator().validateRegister(body)
+    const { success, message, error } = authValidator().validateRegister(user, body)
 
     if (!success) {
       return baseHandler().badRequest(res, message, error)

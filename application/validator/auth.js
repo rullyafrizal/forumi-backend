@@ -1,5 +1,6 @@
 import Joi from 'joi'
 import base from '../../frameworks/validator/joi/base.js'
+import externalJoi from '../../frameworks/validator/joi/external'
 
 export default function authValidator () {
   const validateLogin = (body) => {
@@ -14,9 +15,9 @@ export default function authValidator () {
     )
   }
 
-  const validateRegister = (body) => {
+  const validateRegister = (User, body) => {
     const schema = {
-      email: Joi.string().email().required(),
+      email: Joi.string().email().required().external(externalJoi({ User }).checkUserByEmail),
       password: Joi.string().required(),
       name: Joi.string().required()
     }

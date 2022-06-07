@@ -28,6 +28,23 @@ export default function externalJoi (models) {
     }
   }
 
+  const checkUserByEmail = async (email, ctx) => {
+    try {
+      const user = await models.User.findOne({
+        attributes: ['id'],
+        where: {
+          email
+        }
+      })
+
+      if (!user) {
+        throw generateValidationError('User not found', 'not_found', ctx)
+      }
+    } catch (err) {
+      throw generateValidationError(err.message, 'not_found', ctx)
+    }
+  }
+
   const checkAnswerById = async (answer_id, ctx) => {
     try {
       const answer = await models.Answer.findOne({
@@ -48,6 +65,7 @@ export default function externalJoi (models) {
   return {
     generateValidationError,
     checkQuestionById,
-    checkAnswerById
+    checkAnswerById,
+    checkUserByEmail
   }
 }
