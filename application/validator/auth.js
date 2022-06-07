@@ -22,7 +22,7 @@ export default function authValidator () {
       name: Joi.string().required()
     }
 
-    return base().validateBody(schema, body)
+    return base().validateBodyAsync(schema, body)
   }
 
   return {
