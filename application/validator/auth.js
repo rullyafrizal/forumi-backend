@@ -17,7 +17,7 @@ export default function authValidator () {
 
   const validateRegister = (User, body) => {
     const schema = {
-      email: Joi.string().email().required().external(externalJoi({ User }).checkUserByEmail),
+      email: Joi.string().email().required().external(externalJoi({ User }).checkDuplicateUserByEmail),
       password: Joi.string().required(),
       name: Joi.string().required()
     }

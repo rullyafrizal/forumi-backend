@@ -28,7 +28,7 @@ export default function externalJoi (models) {
     }
   }
 
-  const checkUserByEmail = async (email, ctx) => {
+  const checkDuplicateUserByEmail = async (email, ctx) => {
     try {
       const user = await models.User.findOne({
         attributes: ['id'],
@@ -37,11 +37,11 @@ export default function externalJoi (models) {
         }
       })
 
-      if (!user) {
-        throw generateValidationError('User not found', 'not_found', ctx)
+      if (user) {
+        throw generateValidationError('Email already registered', 'duplicate', ctx)
       }
     } catch (err) {
-      throw generateValidationError(err.message, 'not_found', ctx)
+      throw generateValidationError(err.message, 'duplicate', ctx)
     }
   }
 
@@ -66,6 +66,6 @@ export default function externalJoi (models) {
     generateValidationError,
     checkQuestionById,
     checkAnswerById,
-    checkUserByEmail
+    checkDuplicateUserByEmail
   }
 }
