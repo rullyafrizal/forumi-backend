@@ -15,14 +15,14 @@ export default function authValidator () {
     )
   }
 
-  const validateRegister = (User, body) => {
+  const validateRegister = async (User, body) => {
     const schema = {
       email: Joi.string().email().required().external(externalJoi({ User }).checkDuplicateUserByEmail),
       password: Joi.string().required(),
       name: Joi.string().required()
     }
 
-    return base().validateBodyAsync(schema, body)
+    return await base().validateBodyAsync(schema, body)
   }
 
   return {

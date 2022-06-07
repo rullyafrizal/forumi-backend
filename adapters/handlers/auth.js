@@ -20,10 +20,10 @@ export default function authController (user) {
       .catch((err) => next(err))
   }
 
-  const registerUser = (req, res, next) => {
+  const registerUser = async (req, res, next) => {
     const { body } = req
 
-    const { success, message, error } = authValidator().validateRegister(user, body)
+    const { success, message, error } = await authValidator().validateRegister(user, body)
 
     if (!success) {
       return baseHandler().badRequest(res, message, error)
