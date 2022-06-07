@@ -36,6 +36,10 @@ export default function expressConfig (app) {
       'Access-Control-Allow-Headers',
       'X-Requested-With, Content-type, Authorization, Cache-control, Pragma'
     )
+    res.setHeader(
+      'Access-Control-Allow-Origin',
+      'https://forumi.my.id'
+    )
     // Pass to next layer of middleware
     next()
   })
